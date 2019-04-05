@@ -1,0 +1,98 @@
+This is the writeup for assignment 6 and this includes the analysis of the procedures written for the assignment.
+
+Problem 1 Contains
+
+Operations to count:
+ The for loop executes n times.
+ In the loop, we do subtraction [1], calculate absolute value[1] and compare [1].
+ The running time of this algorithm is 3n.
+
+The input model is the worst case, which the element we need to find is either the last element or is not in the array, so the loop iterates through every element in the array to return a result.
+
+Model T: T(n) = 3n, where n is the length of the array,
+T is bounded by O(n).
+
+Using Big-O Notation, c = 3, x_0 = 0.
+The bound is sound because, when n = 0, T(n) = 0 is equal to c * n = 0; and when n is larger than 0, they are always equal.
+
+
+Problem 2 Fast exponentiation
+
+Operations to count:
+ Check conditions [1].
+ If base case, we mod [1].
+ If not base case:
+ Check conditions [1].
+ If y is even,
+ we multiply (hidden) [1], mod (hidden) [1], divide (hidden) [1] and do recursion on y/2.
+ If y is odd,
+ we subtract (hidden) [1] and do recursion on y-1; we then multiply [1] and mod [1].
+
+Input model: y is a power of two, which means y is 1 (2^0) or even.
+
+When y is 1, T(1) = 2.
+When y is even, T(n) = 5+T(n/2).
+T(n) = 5+T(n/2)
+T(n) = 5+5+T(n/4)
+T(n) = 5+5+5+T(n/8)
+T(n) = 5k+T(n/2^k)
+When k is logn, 2^k is n.
+T(n) = 5logn + T(1) = 5logn + 2, and T is bounded by O(logn).
+
+Using Big-O Notation, c = 6, x_0 = 100.
+The bound is sound because, when n = 100, T(n) = 12 is equal to c * logn = 12; and when n is larger than 100, T(n) is always smaller.
+
+Problem 3 All pairs
+
+Operations to count:
+ Check conditions [1], and the cost of either of the conditions will be the same.
+ The outer loop executes n times,
+ each time we compare (hidden) [1], increment (hidden) [1] and iterate through the inner loop.
+ The inner loop excutes n times,
+ each time we compare (hidden) [1], increment (hidden) [1], array access[2], pair initialize[1], increment[1].
+
+Input model: arr is an array of length n.
+
+Model T: T(n) = 6n^2+2n+1, where n is the length of the array, T is bounded by O(n^2).
+
+Using the Big-O Notation, c = 7, x_0 = 3.
+The bound is sound because, when n = 3, T(n) = 61 is smaller than c * n^2 = 63; and when n is larger than 3, T(n) is always smaller.
+
+
+Problem 4 Concat-replicate
+
+Operations to count:
+ The outer loop executes n times, 
+ each time we compare (hidden) [1], increment (hidden) [1] and iterate through the inner loop.
+ The inner loop excutes x times, x is the parameter n provided,
+ each time we compare (hidden) [1], increment (hidden) [1], array access [1] and concat [1].
+
+Input model: arr is an array of length n, the second parameter int n is x.
+
+Model T: T(n) = (((1+1+1+1)*x)+1+1)*n = (4x+2)n, T is bounded by O(n).
+
+Since concat is bounded by O(m+n) rather than O(1), the model T(n) = (((1+1+1+(m+n))*x)+1+1)*n = ((3+(m+n))*x+2)*n = (3x+2)n+(m+n)n, which is bounded by O((m+n)*n).
+The actual runtime increases as a result of this change.
+
+
+Problem 5 Interleave
+
+Operations to count:
+ Check conditions [1], and the cost of either of the conditions will be the same.
+ If the length of arr2 is larger,
+ the first for loop executes n times, each time we compare (hidden) [1], increment (hidden) [1], access arr1 [1], assign to arr3 [1], access arr2 [1] and assign to arr3 [1];
+ the second for loop executes (m-n) times, each time we compare (hidden) [1], increment (hidden) [1], access arr2 [1] and assign to arr3 [1].
+ If the length of arr1 is larger, we perform the same procedures.
+ 
+Input model: the length of longer array between arr1 and arr2 is m, and the length of the shorter array between arr1 and arr2 is n.
+
+Model T: T(n) = 1+((1+1+1+1+1+1)*n)+((1+1+1+1)*(m-n)) = 4m+2n+1, T is bounded by O(m+n).
+
+The space complexity of the function is (m+n) since only one new array with the length of the sum of arr1 and arr2 is created at the beginning of the program and no more extra space is allocated. T is bounded by O(m+n).
+
+The space complexity is in Problem 4 is lager as the size of the array string and the integer n increases, as we will need to concat more and more times with each concat resulting in a new string.
+There is no relation between time and space complexity based on the conclusion drawn from Problem 4 and Problem 5.
+
+ 
+
+
