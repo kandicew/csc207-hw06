@@ -7,6 +7,7 @@ import java.lang.Math;
 public class Main {
 
   public static void main(String[] args) {
+    //these code are for testing the procedures
     PrintWriter pen = new PrintWriter(System.out, true);
     double arr[] = {1.1, 2, 2.34, 5.34};
     int arrint[] = {1,2,3,4};
@@ -59,17 +60,16 @@ public class Main {
    */
   public static int fastModExp(int x, int y, int m) {
     int mod = 1;
-    if ((y % 2) == 0) {
-      for (int i = 0; i < y / 2; i++) {
-        mod *= ((x * x) % m);
-      }//for
+    if (y == 1) {
+      mod = x % m;
     } else {
-      for (int i = 0; i < y - 1; i++) {
-        mod *= x;
-      }//for
-      mod = x * (mod % m);
+      if ((y % 2) == 0) {
+        mod = fastModExp((x*x)%m, y/2, m);
+      } else {
+        mod = fastModExp(x,y-1, m);
+        mod = (x * mod) % m;
+      }//else
     }//else
-    mod = mod % m;
     return mod;
   }//fastModExp
 
